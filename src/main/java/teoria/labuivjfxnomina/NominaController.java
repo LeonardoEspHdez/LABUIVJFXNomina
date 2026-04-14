@@ -143,7 +143,7 @@ public class NominaController implements Initializable {
         txtHorasTrabajadas.setText("");
 
         txtMatricula.requestFocus();
-        
+
         txtMatricula.setDisable(false);
     }
 
@@ -259,5 +259,20 @@ public class NominaController implements Initializable {
 
         // Deshabilitar matrícula (no se puede editar)
         txtMatricula.setDisable(true);
+    }
+
+    @FXML
+    private void onSalirButtonClick() {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar salida");
+        alert.setHeaderText("¿Estás seguro que deseas salir?");
+        alert.setContentText("Presiona Aceptar para salir o Cancelar para permanecer.");
+
+        Optional<ButtonType> resultado = alert.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 }

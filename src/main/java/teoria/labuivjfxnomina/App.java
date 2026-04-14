@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * JavaFX App
@@ -20,6 +23,20 @@ public class App extends Application {
         scene = new Scene(loadFXML("nomina-view"), 872, 700);
         stage.setScene(scene);
         stage.setTitle("Nómina");
+        stage.setOnCloseRequest(event -> {
+            event.consume(); // bloquea el cierre automático
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmar salida");
+            alert.setHeaderText("¿Estás seguro que deseas salir?");
+            alert.setContentText("Presiona Aceptar para salir o Cancelar para permanecer.");
+
+            Optional<ButtonType> resultado = alert.showAndWait();
+
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                System.exit(0);
+            }
+        });
         stage.show();
     }
 

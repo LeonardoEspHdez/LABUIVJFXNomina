@@ -58,5 +58,6 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
+      <Button fx:id="btnEditar1" layoutX="711.0" layoutY="660.0" mnemonicParsing="false" onAction="#onSalirButtonClick" prefHeight="25.0" prefWidth="94.0" text="Salir" />
    </children>
 </AnchorPane>
