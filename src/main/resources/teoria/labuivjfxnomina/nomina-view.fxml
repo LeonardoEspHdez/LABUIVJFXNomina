@@ -49,7 +49,8 @@
               </columns>
             </TableView>
             <Button fx:id="btnEliminar" layoutX="678.0" layoutY="155.0" mnemonicParsing="false" onAction="#onEliminarEmpleadoButtonClick" prefHeight="25.0" prefWidth="94.0" text="Eliminar" />
-            <Button fx:id="btnMostrarDatos" layoutX="14.0" layoutY="155.0" mnemonicParsing="false" onAction="#onEliminarEmpleadoButtonClick" prefHeight="25.0" prefWidth="94.0" text="Mostrar Todos" />
+            <Button fx:id="btnMostrarDatos" layoutX="14.0" layoutY="155.0" mnemonicParsing="false" onAction="#onMostrarTodosButtonClick" prefHeight="25.0" prefWidth="94.0" text="Mostrar Todos" />
+            <Button fx:id="btnEditar" layoutX="569.0" layoutY="155.0" mnemonicParsing="false" onAction="#onEditarButtonClick" prefHeight="25.0" prefWidth="94.0" text="Editar" />
          </children>
       </Pane>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="257.0" layoutY="14.0" prefHeight="39.0" prefWidth="311.0" text="Nomina de la Empresa &quot;XYZ&quot;" textAlignment="CENTER">

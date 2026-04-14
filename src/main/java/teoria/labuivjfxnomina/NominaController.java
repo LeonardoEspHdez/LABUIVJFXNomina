@@ -100,6 +100,28 @@ public class NominaController implements Initializable {
         double horasTrabajadas = Double.parseDouble(txtHorasTrabajadas.getText());
         double pagoXHora = 800.0;
 
+        // Buscar si ya existe (para editar)
+        for (int i = 0; i < listaEmpleados.size(); i++) {
+            Empleado emp = listaEmpleados.get(i);
+
+            if (emp.getMatricula().equals(matricula)) {
+
+                // Editar empleado existente
+                emp.setNombre(nombre);
+                emp.setApellidos(apellidos);
+                emp.setPuesto(puesto);
+                emp.setHorasTrabajadas(horasTrabajadas);
+                emp.setPagoXHoras(pagoXHora);
+
+                tblListaDeEmpleados.refresh(); // refrescar tabla
+
+                limpiarFormulario();
+                txtMatricula.setDisable(false);
+
+                return;
+            }
+        }
+
         // Creamos el objeto Empleado
         Empleado empleado = new Empleado(matricula, nombre, apellidos, puesto, horasTrabajadas, pagoXHora);
 
@@ -121,6 +143,8 @@ public class NominaController implements Initializable {
         txtHorasTrabajadas.setText("");
 
         txtMatricula.requestFocus();
+        
+        txtMatricula.setDisable(false);
     }
 
     /**
@@ -197,7 +221,7 @@ public class NominaController implements Initializable {
         // actualizar setItems(listaFiltrada)
         tblListaDeEmpleados.setItems(listaFiltrada);
     }
-    
+
     /**
      * Muestra la lista de todos los empleados
      */
@@ -205,5 +229,35 @@ public class NominaController implements Initializable {
     protected void onMostrarTodosButtonClick() {
         txtBuscar.clear();
         tblListaDeEmpleados.setItems(listaEmpleados);
+    }
+
+    /**
+     * Permite editar los datos de los empleados
+     */
+    @FXML
+    protected void onEditarButtonClick() {
+
+        // Obtener el empleado seleccionado
+        Empleado empleadoSeleccionado = tblListaDeEmpleados.getSelectionModel().getSelectedItem();
+
+        // Validar selección
+        if (empleadoSeleccionado == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Sin selección");
+            alert.setHeaderText(null);
+            alert.setContentText("Debes seleccionar un empleado para editar");
+            alert.showAndWait();
+            return;
+        }
+
+        // Pasar datos al formulario
+        txtMatricula.setText(empleadoSeleccionado.getMatricula());
+        txtNombre.setText(empleadoSeleccionado.getNombre());
+        txtApellidos.setText(empleadoSeleccionado.getApellidos());
+        cboPuesto.setValue(empleadoSeleccionado.getPuesto());
+        txtHorasTrabajadas.setText(String.valueOf(empleadoSeleccionado.getHorasTrabajadas()));
+
+        // Deshabilitar matrícula (no se puede editar)
+        txtMatricula.setDisable(true);
     }
 }
